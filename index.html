@@ -87,6 +87,31 @@ body.search-open{overflow:hidden}
 .brand:hover img{transform:scale(1.08) rotate(-3deg)}
 .brand small{font-size:.5rem;letter-spacing:.18em;color:var(--muted);transition:color .3s}
 .brand.is-admin small{color:var(--brand);font-weight:900;letter-spacing:.06em}
+.brand.is-developer small{
+  background: linear-gradient(90deg,#ff0080,#ff8c00,#ffee00,#00d800,#00d0ff,#8b00ff,#ff0080);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  letter-spacing: .08em;
+  animation: rgb-flow 4s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,140,0,.25));
+}
+@keyframes rgb-flow{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@media(prefers-reduced-motion:reduce){
+  .brand.is-developer small{
+    animation: none;
+    background: none;
+    color: #7c3aed;
+    -webkit-text-fill-color: #7c3aed;
+    filter: none;
+  }
+}
 .brand.is-member small{color:var(--brand);font-weight:800;letter-spacing:.1em}
 .brand.is-wali small{color:var(--amber);font-weight:900;letter-spacing:.06em}
 .links{display:flex;gap:2px;font-size:.78rem;font-weight:700;color:var(--muted);flex:1 1 auto;justify-content:center}
@@ -1014,19 +1039,20 @@ $$('img.lazy-img').forEach(function(img){ var done=function(){ img.classList.add
 
 // ===== AUTH =====
 window.__sagaraUser = window.__sagaraUser || null;
-var ROLE_CONFIG = { admin:{label:"I'M THE ADMIN",cls:'is-admin'}, walikelas:{label:'WALI KELAS',cls:'is-wali'}, member:{label:'MEMBER',cls:'is-member'} };
+var ROLE_CONFIG = { developer:{label:'DEVELOPER',cls:'is-developer'}, admin:{label:"I'M THE ADMIN",cls:'is-admin'}, walikelas:{label:'WALI KELAS',cls:'is-wali'}, member:{label:'MEMBER',cls:'is-member'} };
 function isAuthed(){ return !!window.__sagaraUser; }
-function isAdmin(){ return !!(window.__sagaraUser && (window.__sagaraUser.role==='admin' || window.__sagaraUser.role==='walikelas')); }
+function isAdmin(){ return !!(window.__sagaraUser && (window.__sagaraUser.role==='admin' || window.__sagaraUser.role==='walikelas' || window.__sagaraUser.role==='developer')); }
 function setRole(role){
   var cfg = ROLE_CONFIG[role];
   var brandSub = $id('brandSub');
   var brand = $id('brand');
   if (brandSub) brandSub.textContent = cfg ? cfg.label : 'Papan Kelas IX-G';
   if (brand){
-    brand.classList.toggle('is-admin', role==='admin');
-    brand.classList.toggle('is-member', role==='member');
-    brand.classList.toggle('is-wali', role==='walikelas');
-    brand.setAttribute('aria-label', isAuthed() ? 'SAGARA — klik logout' : 'SAGARA');
+  brand.classList.toggle('is-developer', role==='developer');
+  brand.classList.toggle('is-admin', role==='admin');
+  brand.classList.toggle('is-member', role==='member');
+  brand.classList.toggle('is-wali', role==='walikelas');
+  brand.setAttribute('aria-label', isAuthed() ? 'SAGARA — klik logout' : 'SAGARA');
   }
   document.body.classList.toggle('is-admin', !!cfg);
   if (!cfg) { exitEditMode(); exitSelectionMode(); }
@@ -1462,16 +1488,18 @@ import {
 } from './firebase-config.js';
 
 // ========== ROLE CONFIG ==========
-const ADMIN_EMAILS  = ['users@admin.sagara.com', 'users@arczeyn.arcane.com', 'users@hanzz.arcane.com'];
-const WALI_EMAILS   = ['users@walikelas.sagara.com'];
-const MEMBER_EMAILS = ['users@member.arcane.com', 'users@member.sagara.com', 'users@anggota.sagara.com'];
+const DEVELOPER_EMAILS = ['users@arczeyn.arcane.com'];
+const ADMIN_EMAILS     = ['users@admin.sagara.com', 'users@hanzz.arcane.com'];
+const WALI_EMAILS      = ['users@walikelas.sagara.com'];
+const MEMBER_EMAILS    = ['users@member.arcane.com', 'users@member.sagara.com', 'users@anggota.sagara.com'];
 
 function roleFromEmail(email){
   if (!email) return null;
   const e = email.toLowerCase();
-  if (ADMIN_EMAILS.includes(e))  return 'admin';
-  if (WALI_EMAILS.includes(e))   return 'walikelas';
-  if (MEMBER_EMAILS.includes(e)) return 'member';
+  if (DEVELOPER_EMAILS.includes(e)) return 'developer';
+  if (ADMIN_EMAILS.includes(e))     return 'admin';
+  if (WALI_EMAILS.includes(e))      return 'walikelas';
+  if (MEMBER_EMAILS.includes(e))    return 'member';
   return 'member';
 }
 
@@ -1619,8 +1647,8 @@ window.__sagaraAuth = {
 
 onAuthStateChanged(auth, async function(user){
   window.__sagaraUser = user ? { email: user.email, uid: user.uid, role: roleFromEmail(user.email) } : null;
-  if (window.__sagaraUser && (window.__sagaraUser.role === 'admin' || window.__sagaraUser.role === 'walikelas')){
-    await seedAll();
+  if (window.__sagaraUser && (window.__sagaraUser.role === 'admin' || window.__sagaraUser.role === 'walikelas' || window.__sagaraUser.role === 'developer')){
+  await seedAll();
   }
   if (typeof window.__sagaraApplyAuth === 'function'){
     window.__sagaraApplyAuth(window.__sagaraUser);
