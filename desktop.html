@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="id" data-theme="light" data-device="desktop">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f9f5">
+<meta name="description" content="SAGARA — papan kelas digital IX-G: pengurus, kesepakatan, PR, agenda, kenangan, dan hiburan.">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate">
+<link rel="icon" type="image/png" href="assets/SAGARA-logo.png">
+<title>SAGARA · Papan Kelas IX-G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+<script>
+(function(){try{var t=localStorage.getItem('sagara-theme');if(!t)t=(matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#071412':'#f4f9f5');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="style-shared.css">
+<link rel="stylesheet" href="style-desktop.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Lewati ke konten</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav class="section-dots" aria-label="Navigasi section">
+  <a href="#home" data-dot="beranda" aria-label="Beranda"></a>
+  <a href="#struktur" data-dot="struktur" aria-label="Struktur"></a>
+  <a href="#aturan" data-dot="aturan" aria-label="Aturan"></a>
+  <a href="#tugas" data-dot="tugas" aria-label="Tugas"></a>
+  <a href="#acara" data-dot="acara" aria-label="Acara"></a>
+  <a href="#kenangan" data-dot="kenangan" aria-label="Kenangan"></a>
+  <a href="#media" data-dot="media" aria-label="Hiburan"></a>
+</nav>
+
+<header class="top">
+  <div class="container">
+    <nav class="mainnav">
+      <a class="brand" id="brand" href="#home">
+        <img class="lazy-img" src="assets/SAGARA-logo.png" alt="Logo SAGARA" loading="eager" decoding="async" width="36" height="36">
+        <span>SAGARA<br><small id="brandSub">Papan Kelas IX-G</small></span>
+      </a>
+      <div class="links" id="links">
+        <a href="#home">Beranda</a>
+        <a href="#struktur">Struktur</a>
+        <a href="#aturan">Aturan</a>
+        <a href="#tugas">Tugas</a>
+        <a href="#acara">Acara</a>
+        <a href="#kenangan">Kenangan</a>
+        <a href="#media">Hiburan</a>
+      </div>
+      <div class="nav-tools">
+        <button class="icon-btn" id="searchBtn" aria-label="Buka pencarian" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        </button>
+        <button class="icon-btn" id="themeToggle" aria-label="Ganti tema" type="button">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- SEARCH PANEL -->
+<div class="search-panel" id="searchPanel">
+  <div class="search-modal-wrap">
+    <div class="search-content">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input type="text" id="searchInput" placeholder="Cari section, tugas, aturan..." autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-label="Cari">
+        <button class="search-clear" id="searchClear" type="button" aria-label="Hapus pencarian" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+        <kbd>esc</kbd>
+      </div>
+      <div class="search-results-card">
+        <div class="search-filters" id="searchFilters" role="tablist" aria-label="Filter hasil">
+          <button type="button" class="search-filter is-active" data-filter="all" role="tab" aria-selected="true">Semua</button>
+          <button type="button" class="search-filter" data-filter="section" role="tab" aria-selected="false">Section</button>
+          <button type="button" class="search-filter" data-filter="card" role="tab" aria-selected="false">Kartu</button>
+        </div>
+        <ul class="search-results" id="searchResults" role="listbox" aria-label="Hasil pencarian"></ul>
+        <div class="search-footer">
+          <span><kbd>↑</kbd><kbd>↓</kbd> pilih</span>
+          <span><kbd>↵</kbd> buka</span>
+          <span><kbd>esc</kbd> tutup</span>
+          <span><kbd>⌘</kbd><kbd>K</kbd> toggle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sr-only" role="status" aria-live="polite" id="searchAnnounce"></div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">
+        <svg viewBox="0 0 26 7" aria-hidden="true"><path d="M1 4c3.5-3.5 6 3.5 9.5 0s6 3.5 9.5 0 4 2 5 0"/></svg>
+        Kelas IX-G · 2025/2026
+      </span>
+      <h1>Papan kelas <em>Sagara</em></h1>
+      <p class="hero-lead">Semua yang perlu kamu tahu hari ini ada di sini: siapa pengurusnya, kesepakatan kelas, PR yang belum masuk, agenda berikutnya, dan momen yang bikin IX-G terasa seperti rumah.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#tugas">Cek PR hari ini
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#struktur">Lihat pengurus</a>
+        <button class="btn btn-ghost btn-edit" id="editToggle" type="button" aria-label="Aktifkan mode edit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Edit</span>
+        </button>
+      </div>
+      <div class="hero-facts">
+        <span><b>32</b> siswa</span><i></i>
+        <span><b>1</b> wali kelas</span><i></i>
+        <span><b>6</b> pengurus</span><i></i>
+        <span>Ruang <b>IX-G</b></span>
+      </div>
+    </div>
+
+    <div class="board-wrap reveal">
+      <div class="board">
+        <div class="board-top">
+          <span class="board-class">IX-G</span>
+          <span class="board-date" id="boardDate">Hari ini</span>
+        </div>
+        <div class="board-rule"></div>
+        <div>
+          <span class="board-lbl">PR paling dekat</span>
+          <b class="board-task" id="boardTask">—</b>
+          <span class="board-sub">
+            <span class="board-chip" id="boardTag">—</span>
+            <span id="boardTaskDate">—</span>
+          </span>
+          <span class="board-count" id="boardCount">—</span>
+        </div>
+        <div class="board-foot">
+          <div>
+            <span class="board-lbl">Acara berikutnya</span>
+            <b id="boardEvent">—</b>
+            <span class="d" id="boardEventDate">—</span>
+            <div class="progress-mini"><div class="progress-mini-fill" id="boardProgressFill" style="width:0%"></div></div>
+            <span class="progress-mini-txt" id="boardProgressTxt">0 / 0 PR selesai</span>
+          </div>
+        </div>
+      </div>
+      <div class="board-tray" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUKTUR -->
+<section class="section" id="struktur">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Struktur
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>Pengurus kelas</h2>
+      <p>Enam orang yang memegang amanah IX-G tahun ini, di bawah wali kelas.</p>
+    </div>
+    <div class="pengurus-wrap reveal">
+      <h3 class="pengurus-title">Siapa pegang apa</h3>
+      <p class="pengurus-sub">Wali kelas → ketua → wakil → sekretaris &amp; bendahara</p>
+      <div class="section-empty" id="empty-pengurus" hidden>
+        <b>Belum ada data pengurus</b>
+        <p>Login sebagai admin untuk memuat data demo.</p>
+      </div>
+      <div class="pg-grid" data-cards id="pgGrid">
+        <div class="pg-row"><div class="pg-card is-wali" data-card data-role="walikelas" data-id="walikelas"><div class="pg-avatar" data-initials>W</div><div class="pg-name" data-name>Wali Kelas</div><div class="pg-role">Wali Kelas</div></div></div>
+        <div class="pg-connector"></div>
+        <div class="pg-row">
+          <div class="pg-card" data-card data-role="ketua" data-id="ketua"><div class="pg-avatar" data-initials>K</div><div class="pg-name" data-name>Ketua Kelas</div><div class="pg-role">Ketua</div></div>
+          <div class="pg-card" data-card data-role="wakil" data-id="wakil"><div class="pg-avatar" data-initials>W</div><div class="pg-name" data-name>Wakil Ketua</div><div class="pg-role">Wakil</div></div>
+        </div>
+        <div class="pg-fork"></div>
+        <div class="pg-row">
+          <div class="pg-card" data-card data-role="sekretaris1" data-id="sekretaris1"><div class="pg-avatar" data-initials>S1</div><div class="pg-name" data-name>Sekretaris 1</div><div class="pg-role">Sekretaris</div></div>
+          <div class="pg-card" data-card data-role="bendahara1" data-id="bendahara1"><div class="pg-avatar" data-initials>B1</div><div class="pg-name" data-name>Bendahara 1</div><div class="pg-role">Bendahara</div></div>
+        </div>
+        <div class="pg-row">
+          <div class="pg-card" data-card data-role="sekretaris2" data-id="sekretaris2"><div class="pg-avatar" data-initials>S2</div><div class="pg-name" data-name>Sekretaris 2</div><div class="pg-role">Sekretaris</div></div>
+          <div class="pg-card" data-card data-role="bendahara2" data-id="bendahara2"><div class="pg-avatar" data-initials>B2</div><div class="pg-name" data-name>Bendahara 2</div><div class="pg-role">Bendahara</div></div>
+        </div>
+      </div>
+      <p class="pg-note">ada keperluan? langsung hubungi ketua kelas dulu, ya.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ATURAN -->
+<section class="section section--alt" id="aturan">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Aturan
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>Kesepakatan kelas</h2>
+      <p>Hal-hal yang kita setujui bersama supaya IX-G nyaman buat semua orang.</p>
+      <div class="add-btn-wrap" data-tools="aturan">
+        <button class="add-btn" aria-label="Tambah aturan" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="tabs-bar" role="tablist" aria-label="Jenis aturan">
+        <button class="tab-btn is-active" data-tab="umum" role="tab" aria-selected="true">Kesepakatan Kelas</button>
+        <button class="tab-btn" data-tab="mapel" role="tab" aria-selected="false">Per Mapel</button>
+      </div>
+
+      <div class="tab-panel is-active" data-tabpanel="umum">
+        <div class="section-empty" id="empty-aturan" hidden>
+          <b>Belum ada aturan kelas</b>
+          <p>Tambahkan kesepakatan pertama lewat mode admin.</p>
+        </div>
+        <ol class="rules-list" data-cards id="rulesList"></ol>
+      </div>
+
+      <div class="tab-panel" data-tabpanel="mapel">
+        <div class="section-empty" id="empty-mapel" hidden>
+          <b>Belum ada aturan per mapel</b>
+          <p>Tambahkan mapel beserta aturannya lewat mode admin.</p>
+        </div>
+        <div data-cards id="mapelList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUGAS -->
+<section class="section" id="tugas">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Tugas
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>PR yang belum selesai</h2>
+      <p>Cek tanggal pengumpulan sebelum pulang. Tandai selesai kalau sudah dikerjakan.</p>
+      <div class="add-btn-wrap" data-tools="tugas">
+        <button class="add-btn" aria-label="Tambah tugas" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="tugas-progress">
+        <div class="tp-info">
+          <span class="tp-label">Progress PR minggu ini</span>
+          <div class="tp-bar"><div class="tp-fill" id="tpFill" style="width:0%"></div></div>
+        </div>
+        <div class="tp-count"><span id="tpDone">0</span><small>/<span id="tpTotal">0</span></small></div>
+      </div>
+
+      <div class="tugas-filter" role="toolbar" aria-label="Filter tugas">
+        <button class="filter-chip is-active" data-filter="all" type="button">Semua</button>
+        <button class="filter-chip" data-filter="week" type="button">Minggu ini</button>
+        <button class="filter-chip" data-filter="overdue" type="button">Lewat tenggat</button>
+        <button class="filter-chip" data-filter="undone" type="button">Belum selesai</button>
+      </div>
+
+      <div class="section-empty" id="empty-tugas" hidden>
+        <b>Belum ada PR</b>
+        <p>Tambahkan tugas pertama lewat mode admin.</p>
+      </div>
+
+      <div class="tugas-list" id="tugasList" data-cards></div>
+      <div class="tugas-empty" id="tugasEmpty" hidden>
+        <b>Belum ada PR untuk filter ini</b>
+        Coba filter lain atau tarik napas dulu 🌿
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACARA -->
+<section class="section section--alt" id="acara">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Acara
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>Agenda kelas</h2>
+      <p>Kegiatan yang sudah direncanakan bersama. Detail biaya menyusul di grup.</p>
+      <div class="add-btn-wrap" data-tools="acara">
+        <button class="add-btn" aria-label="Tambah acara" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="section-empty" id="empty-acara" hidden>
+      <b>Belum ada acara</b>
+      <p>Tambahkan agenda pertama lewat mode admin.</p>
+    </div>
+
+    <div class="acara-list" id="acaraList" data-cards></div>
+  </div>
+</section>
+
+<!-- KENANGAN (BENTO) -->
+<section class="section" id="kenangan">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Kenangan
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>Momen yang kita lewati</h2>
+      <p>Hal-hal kecil yang bikin kelas ini terasa seperti rumah. Klik foto untuk memperbesar.</p>
+      <div class="add-btn-wrap" data-tools="kenangan">
+        <button class="add-btn" aria-label="Tambah kenangan" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="section-empty" id="empty-kenangan" hidden>
+      <b>Belum ada kenangan</b>
+      <p>Tambahkan foto pertama lewat mode admin, atau upload ke folder `assets/kenangan/`.</p>
+    </div>
+
+    <div class="bento-grid" id="kenanganList" data-cards></div>
+  </div>
+</section>
+
+<!-- STIKER & VIDEO -->
+<section class="section section--alt" id="media">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Stiker & Video
+        <svg class="squiggle" viewBox="0 0 60 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 5c8-5 14 5 22 0s14 5 22 0 10 3 12 0"/></svg>
+      </span>
+      <h2>Hiburan Kelas</h2>
+      <p>Kumpulan stiker lucu SAGARA dan video seru kelas IX-G. Bisa video MP4 atau YouTube.</p>
+      <div class="add-btn-wrap" data-tools="media">
+        <button class="add-btn" aria-label="Tambah media" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="section-empty" id="empty-media" hidden>
+      <b>Belum ada stiker atau video</b>
+      <p>Tambahkan hiburan pertama lewat mode admin, atau upload ke folder `assets/hiburan/`.</p>
+    </div>
+
+    <div class="media-grid" id="mediaList" data-cards></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Yang kami lakukan</h4>
+        <a href="#struktur">Struktur Kelas</a>
+        <a href="#aturan">Kesepakatan</a>
+        <a href="#tugas">Tugas & PR</a>
+        <a href="#acara">Agenda Acara</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siapa kami</h4>
+        <a href="#home">Tentang SAGARA</a>
+        <a href="#media">Stiker & Video</a>
+        <a href="#kenangan">Galeri Kenangan</a>
+        <a href="#/login">Pengurus</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sosial Media</h4>
+        <a href="https://instagram.com/sagara" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@sagara" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener">Saluran WhatsApp</a>
+      </div>
+      <div class="footer-col">
+        <h4>Bantuan & Privasi</h4>
+        <a href="#">Pusat Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Ketentuan Layanan</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> SAGARA · Papan Kelas IX-G. Hak cipta dilindungi.</div>
+      <div class="footer-lang">
+        Bahasa Indonesia
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Kembali ke atas" type="button">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<div class="selection-toolbar" id="selToolbar" hidden>
+  <span class="sel-count"><strong id="selCount">0</strong> dipilih</span>
+  <button class="btn btn-ghost" type="button" id="selCancel">Batal</button>
+  <button class="btn btn-danger" type="button" id="selDelete">Hapus</button>
+</div>
+
+<div id="loginView" class="view login-view" hidden>
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="assets/SAGARA-logo.png" alt="" onerror="this.style.visibility='hidden'">
+      <div>SAGARA<small>LOGIN</small></div>
+    </div>
+    <h1>Masuk</h1>
+    <p class="subtitle">Untuk pengurus dan anggota IX-G.</p>
+    <form id="loginForm" class="login-form" novalidate>
+      <div class="login-field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" name="email" required placeholder="nama@email.com" autocomplete="email"></div>
+      <div class="login-field">
+        <label for="loginPassword">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="loginPassword" name="password" required placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="password-toggle" id="passwordToggle" aria-label="Tampilkan password" aria-pressed="false">
+            <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="login-error" id="loginError" role="alert"></div>
+      <button class="btn" type="submit" id="loginSubmit">Masuk</button>
+    </form>
+    <div class="login-hint">
+      <div>Gunakan akun Firebase Auth SAGARA.</div>
+      <div style="margin-top:6px;opacity:.7">Belum punya akun? Hubungi ketua kelas / wali kelas.</div>
+      <div style="margin-top:8px;opacity:.7">Role otomatis dideteksi dari email di <code>firebase-config.js</code>.</div>
+    </div>
+    <a class="login-back" href="#home">← Kembali</a>
+  </div>
+</div>
+
+<div class="confirm-overlay" id="confirmDialog" hidden>
+  <div class="confirm-backdrop" data-confirm-close></div>
+  <div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="confirm-icon" aria-hidden="true">!</div>
+    <h2 id="confirmTitle">Yakin?</h2>
+    <p id="confirmDesc">—</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" type="button" data-confirm-close>Batal</button>
+      <button class="btn btn-danger" type="button" id="confirmYes">Ya</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="formModal" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    <h2 id="formModalTitle">Tambah</h2>
+    <form class="modal-form" id="formModalForm" novalidate>
+      <div class="modal-field"><label for="fmTitle">Judul / Nama</label><input type="text" id="fmTitle" name="title" required maxlength="120"></div>
+      <div class="modal-field" data-field="desc" hidden><label for="fmDesc">Deskripsi</label><textarea id="fmDesc" name="desc" maxlength="500"></textarea></div>
+      <div class="modal-field" data-field="num" hidden><label for="fmNum">Nomor (contoh: 01)</label><input type="text" id="fmNum" name="num" maxlength="10" placeholder="01"></div>
+      <div class="modal-field" data-field="tag" hidden><label for="fmTag">Mata pelajaran / Jabatan</label><input type="text" id="fmTag" name="tag" maxlength="40" placeholder="Matematika / Ketua"></div>
+      <div class="modal-field" data-field="badge" hidden><label for="fmBadge">Label acara</label><input type="text" id="fmBadge" name="badge" maxlength="40" placeholder="Lomba / Rutin / Kunjungan"></div>
+      <div class="modal-field" data-field="date" hidden><label for="fmDate">Tanggal</label><input type="date" id="fmDate" name="date"></div>
+      <div class="modal-field" data-field="time" hidden><label for="fmTime">Waktu</label><input type="text" id="fmTime" name="time" maxlength="20" placeholder="08.00"></div>
+      <div class="modal-field" data-field="place" hidden><label for="fmPlace">Tempat</label><input type="text" id="fmPlace" name="place" maxlength="80" placeholder="Lapangan sekolah"></div>
+      <div class="modal-field" data-field="image" hidden><label for="fmImage">Path Foto (contoh: assets/kenangan/1.png)</label><input type="text" id="fmImage" name="image" placeholder="assets/kenangan/1.png" maxlength="500"></div>
+      <div class="modal-field" data-field="caption" hidden><label for="fmCaption">Caption (opsional)</label><input type="text" id="fmCaption" name="caption" maxlength="120" placeholder="foto kelas pertama"></div>
+      <div class="modal-field" data-field="wa" hidden><label for="fmWa">Nomor WA (opsional)</label><input type="text" id="fmWa" name="wa" maxlength="20" placeholder="62812..."></div>
+      <div class="modal-field" data-field="list" hidden><label for="fmList">Daftar aturan (satu per baris)</label><textarea id="fmList" name="list" rows="6" placeholder="Bawa kalkulator ilmiah&#10;Kumpul PR sebelum masuk kelas&#10;Tulis langkah pengerjaan"></textarea></div>
+      <div class="modal-field" data-field="jabatan" hidden><label for="fmJabatan">Jabatan (tampil di kartu)</label><input type="text" id="fmJabatan" name="jabatan" maxlength="40" placeholder="Ketua / Wakil / Sekretaris"></div>
+      <div class="modal-field" data-field="foto" hidden><label for="fmFoto">Path foto (opsional)</label><input type="text" id="fmFoto" name="foto" placeholder="assets/pengurus/ketua.png" maxlength="500"></div>
+      <div class="modal-field" data-field="mediaType" hidden><label for="fmMediaType">Tipe Media</label><select id="fmMediaType" name="mediaType"><option value="stiker">Stiker (Gambar)</option><option value="video">Video (YouTube/MP4)</option></select></div>
+      <div class="modal-field" data-field="mediaUrl" hidden><label for="fmMediaUrl">Path / URL Media</label><input type="text" id="fmMediaUrl" name="mediaUrl" placeholder="assets/hiburan/1.png atau youtube.com/..." maxlength="500"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" data-modal-close>Batal</button>
+        <button class="btn" type="submit">Simpan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+<script src="app.js"></script>
+<script type="module" src="firebase-init.js"></script>
+</body>
+</html>

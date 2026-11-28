@@ -1,0 +1,61 @@
+/* =========================================================
+   DESKTOP LAYOUT
+   Aktif hanya di desktop.html
+   ========================================================= */
+
+/* --- HERO: 2 kolom (teks kiri, papan ijo kanan) --- */
+.hero-grid{
+  grid-template-columns:1.06fr .94fr;
+  gap:48px;
+}
+.board-wrap{
+  justify-self:end;
+  max-width:480px;
+}
+
+/* --- NAVBAR: tampilkan menu horizontal + dots --- */
+.links{ display:flex; }
+.section-dots{ display:flex; }
+
+/* --- BENTO UI: 4 kolom, pola selang-seling khas Bento --- */
+.bento-grid{
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:200px;
+  gap:16px;
+  padding:4px 0;
+}
+.bento-item:nth-child(6n + 1){ grid-column:span 2; grid-row:span 2; }
+.bento-item:nth-child(6n + 2){ grid-column:span 2; grid-row:span 1; }
+.bento-item:nth-child(6n + 3){ grid-column:span 1; grid-row:span 1; }
+.bento-item:nth-child(6n + 4){ grid-column:span 1; grid-row:span 1; }
+.bento-item:nth-child(6n + 5){ grid-column:span 2; grid-row:span 1; }
+.bento-item:nth-child(6n + 6){ grid-column:span 2; grid-row:span 1; }
+
+/* --- ATURAN: 2 kolom dengan border pemisah tengah --- */
+.rules-list{
+  grid-template-columns:1fr 1fr;
+}
+.rule{
+  padding:24px 22px 24px 0;
+}
+.rule:nth-child(odd){
+  padding-right:28px;
+  border-right:1px solid var(--line);
+}
+.rule:nth-child(even){
+  padding-left:28px;
+}
+
+/* --- PENGURUS: kartu lebar, wali kelas lebih lebar --- */
+.pg-card{ min-width:150px; }
+.pg-card.is-wali{ min-width:220px; }
+
+/* --- MEDIA: auto-fill responsive (280px min) --- */
+.media-grid{
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* --- SPACING DESKTOP --- */
+.container{ width:min(1180px, 100% - 32px); }
+.section{ padding:76px 0; }
+.mainnav{ height:64px; }

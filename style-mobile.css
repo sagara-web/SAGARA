@@ -1,0 +1,147 @@
+/* =========================================================
+   MOBILE LAYOUT
+   Aktif hanya di mobile.html
+   ========================================================= */
+
+/* --- HERO: 1 kolom (teks di atas, papan ijo di bawah) --- */
+.hero-grid{
+  grid-template-columns:1fr;
+  gap:36px;
+}
+.board-wrap{
+  justify-self:stretch;
+  max-width:100%;
+}
+
+/* --- NAVBAR: menu horizontal disembunyikan, dots hilang --- */
+.links{ display:none; }
+.section-dots{ display:none; }
+.mainnav{ height:60px; }
+.brand img{ width:32px; height:32px; }
+.brand{ font-size:12px; }
+
+/* --- TAP TARGET: perbesar tombol ikon untuk jari --- */
+.icon-btn{ width:40px; height:40px; }
+
+/* --- BENTO UI: 2 kolom, tinggi 150px --- */
+.bento-grid{
+  grid-template-columns:repeat(2,1fr);
+  grid-auto-rows:150px;
+  gap:12px;
+  padding:4px 0;
+}
+.bento-item:nth-child(6n + 1){ grid-column:span 2; grid-row:span 2; }
+.bento-item:nth-child(6n + 2){ grid-column:span 2; grid-row:span 1; }
+.bento-item:nth-child(6n + 3){ grid-column:span 1; grid-row:span 1; }
+.bento-item:nth-child(6n + 4){ grid-column:span 1; grid-row:span 1; }
+.bento-item:nth-child(6n + 5){ grid-column:span 1; grid-row:span 1; }
+.bento-item:nth-child(6n + 6){ grid-column:span 1; grid-row:span 1; }
+
+/* --- ATURAN: 1 kolom penuh --- */
+.rules-list{
+  grid-template-columns:1fr;
+}
+.rule{
+  padding:20px 0;
+}
+
+/* --- PENGURUS: kartu 2 per baris, wali full width --- */
+.pg-card{
+  min-width:calc(50% - 7px);
+  flex:1 1 calc(50% - 7px);
+}
+.pg-card.is-wali{
+  min-width:100%;
+  flex:1 1 100%;
+}
+
+/* --- MEDIA: 1 kolom penuh --- */
+.media-grid{
+  grid-template-columns:1fr;
+}
+
+/* --- SPACING MOBILE --- */
+.container{ width:calc(100% - 28px); }
+.section{ padding:56px 0; }
+.sec-head{ margin-bottom:26px; }
+.hero h1{ font-size:clamp(2rem, 9vw, 2.6rem); }
+.board{ padding:20px 18px 18px; }
+.board-task{ font-size:1.1rem; }
+.board-count{ font-size:1.7rem; }
+.board-foot{ grid-template-columns:1fr; gap:12px; }
+
+/* --- TUGAS: meta turun ke baris baru --- */
+.tugas-item{
+  grid-template-columns:auto 1fr;
+  gap:10px 12px;
+}
+.tugas-meta{
+  grid-column:2;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+.tugas-due{ text-align:left; }
+.tugas-progress{
+  flex-direction:column;
+  align-items:stretch;
+  gap:10px;
+}
+.tp-count{ text-align:right; }
+
+/* --- ACARA: 1 kolom, date di atas --- */
+.acara-item{
+  grid-template-columns:1fr;
+  gap:12px;
+  padding:18px;
+}
+.acara-date{
+  border-right:none;
+  border-bottom:1px solid var(--line);
+  padding-right:0;
+  padding-bottom:10px;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+.acara-date b{ font-size:1.8rem; }
+.acara-date span{ margin-top:0; }
+.acara-side{
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+
+/* --- SEARCH PANEL: sesuaikan dengan navbar mobile --- */
+.search-panel{ top:60px; }
+.search-modal-wrap{ padding:16px 0 20px; border-radius:0 0 20px 20px; }
+.search-content{ width:calc(100% - 24px); gap:12px; }
+.search-field{ padding:10px 16px; }
+.search-results-card{ max-height:calc(100vh - 200px); }
+/* Sembunyikan hint keyboard (tidak relevan di HP) */
+.search-field kbd,
+.search-footer{ display:none; }
+
+/* --- TOOLBAR HAPUS: full width di bottom --- */
+.selection-toolbar{
+  left:12px;
+  right:12px;
+  transform:none;
+  width:auto;
+}
+
+/* --- FLASH HIGHLIGHT: lebih rapat --- */
+section.is-flash::after{
+  inset:8px;
+  border-radius:24px;
+}
+
+/* --- FOOTER: tetap 2x2 (sesuai permintaan) --- */
+.footer-grid{
+  grid-template-columns:1fr 1fr;
+  gap:28px 12px;
+}
+.footer-col h4{ font-size:.85rem; margin-bottom:14px; }
+.footer-col a{ font-size:.78rem; margin-bottom:9px; }
