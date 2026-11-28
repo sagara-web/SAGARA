@@ -407,4 +407,83 @@
   <button class="btn btn-danger" type="button" id="selDelete">Hapus</button>
 </div>
 
-<div id="
+<div id="loginView" class="view login-view" hidden>
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="assets/SAGARA-logo.png" alt="" onerror="this.style.visibility='hidden'">
+      <div>SAGARA<small>LOGIN</small></div>
+    </div>
+    <h1>Masuk</h1>
+    <p class="subtitle">Untuk pengurus dan anggota IX-G.</p>
+    <form id="loginForm" class="login-form" novalidate>
+      <div class="login-field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" name="email" required placeholder="nama@email.com" autocomplete="email"></div>
+      <div class="login-field">
+        <label for="loginPassword">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="loginPassword" name="password" required placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="password-toggle" id="passwordToggle" aria-label="Tampilkan password" aria-pressed="false">
+            <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="login-error" id="loginError" role="alert"></div>
+      <button class="btn" type="submit" id="loginSubmit">Masuk</button>
+    </form>
+    <div class="login-hint">
+      <div>Gunakan akun Firebase Auth SAGARA.</div>
+      <div style="margin-top:6px;opacity:.7">Belum punya akun? Hubungi ketua kelas / wali kelas.</div>
+      <div style="margin-top:8px;opacity:.7">Role otomatis dideteksi dari email di <code>firebase-config.js</code>.</div>
+    </div>
+    <a class="login-back" href="#home">← Kembali</a>
+  </div>
+</div>
+
+<div class="confirm-overlay" id="confirmDialog" hidden>
+  <div class="confirm-backdrop" data-confirm-close></div>
+  <div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="confirm-icon" aria-hidden="true">!</div>
+    <h2 id="confirmTitle">Yakin?</h2>
+    <p id="confirmDesc">—</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" type="button" data-confirm-close>Batal</button>
+      <button class="btn btn-danger" type="button" id="confirmYes">Ya</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="formModal" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    <h2 id="formModalTitle">Tambah</h2>
+    <form class="modal-form" id="formModalForm" novalidate>
+      <div class="modal-field"><label for="fmTitle">Judul / Nama</label><input type="text" id="fmTitle" name="title" required maxlength="120"></div>
+      <div class="modal-field" data-field="desc" hidden><label for="fmDesc">Deskripsi</label><textarea id="fmDesc" name="desc" maxlength="500"></textarea></div>
+      <div class="modal-field" data-field="num" hidden><label for="fmNum">Nomor (contoh: 01)</label><input type="text" id="fmNum" name="num" maxlength="10" placeholder="01"></div>
+      <div class="modal-field" data-field="tag" hidden><label for="fmTag">Mata pelajaran / Jabatan</label><input type="text" id="fmTag" name="tag" maxlength="40" placeholder="Matematika / Ketua"></div>
+      <div class="modal-field" data-field="badge" hidden><label for="fmBadge">Label acara</label><input type="text" id="fmBadge" name="badge" maxlength="40" placeholder="Lomba / Rutin / Kunjungan"></div>
+      <div class="modal-field" data-field="date" hidden><label for="fmDate">Tanggal</label><input type="date" id="fmDate" name="date"></div>
+      <div class="modal-field" data-field="time" hidden><label for="fmTime">Waktu</label><input type="text" id="fmTime" name="time" maxlength="20" placeholder="08.00"></div>
+      <div class="modal-field" data-field="place" hidden><label for="fmPlace">Tempat</label><input type="text" id="fmPlace" name="place" maxlength="80" placeholder="Lapangan sekolah"></div>
+      <div class="modal-field" data-field="image" hidden><label for="fmImage">Path Foto (contoh: assets/kenangan/1.png)</label><input type="text" id="fmImage" name="image" placeholder="assets/kenangan/1.png" maxlength="500"></div>
+      <div class="modal-field" data-field="caption" hidden><label for="fmCaption">Caption (opsional)</label><input type="text" id="fmCaption" name="caption" maxlength="120" placeholder="foto kelas pertama"></div>
+      <div class="modal-field" data-field="wa" hidden><label for="fmWa">Nomor WA (opsional)</label><input type="text" id="fmWa" name="wa" maxlength="20" placeholder="62812..."></div>
+      <div class="modal-field" data-field="list" hidden><label for="fmList">Daftar aturan (satu per baris)</label><textarea id="fmList" name="list" rows="6" placeholder="Bawa kalkulator ilmiah&#10;Kumpul PR sebelum masuk kelas&#10;Tulis langkah pengerjaan"></textarea></div>
+      <div class="modal-field" data-field="jabatan" hidden><label for="fmJabatan">Jabatan (tampil di kartu)</label><input type="text" id="fmJabatan" name="jabatan" maxlength="40" placeholder="Ketua / Wakil / Sekretaris"></div>
+      <div class="modal-field" data-field="foto" hidden><label for="fmFoto">Path foto (opsional)</label><input type="text" id="fmFoto" name="foto" placeholder="assets/pengurus/ketua.png" maxlength="500"></div>
+      <div class="modal-field" data-field="mediaType" hidden><label for="fmMediaType">Tipe Media</label><select id="fmMediaType" name="mediaType"><option value="stiker">Stiker (Gambar)</option><option value="video">Video (YouTube/MP4)</option></select></div>
+      <div class="modal-field" data-field="mediaUrl" hidden><label for="fmMediaUrl">Path / URL Media</label><input type="text" id="fmMediaUrl" name="mediaUrl" placeholder="assets/hiburan/1.png atau youtube.com/..." maxlength="500"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" data-modal-close>Batal</button>
+        <button class="btn" type="submit">Simpan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+<script src="app.js"></script>
+<script type="module" src="firebase-init.js"></script>
+</body>
+</html>
